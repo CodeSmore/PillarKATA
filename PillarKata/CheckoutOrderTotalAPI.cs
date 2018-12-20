@@ -8,11 +8,16 @@ namespace PillarKata
 {
     public class CheckoutOrderTotalAPI
     {
-        public double CalculateTotalPrice(List<Item> cart)
+        public decimal CalculateTotalPrice(List<Item> cart)
         {
+            decimal totalPrice = 0;
 
+            foreach (Item item in cart)
+            {
+                totalPrice += item.BasePrice;
+            }
 
-            return 1.69d;
+            return totalPrice;
         }
 
     }

@@ -9,6 +9,15 @@ namespace PillarKata
     public class Item
     {
         public int Id { get; set; }
-        public float BasePrice { get; set; }
+        public decimal BasePrice { get; set; }
+
+        public Item()
+        { }
+
+        public Item(int id, decimal basePrice)
+        {
+            Id = id;
+            BasePrice = basePrice;
+        }
     }
 }
