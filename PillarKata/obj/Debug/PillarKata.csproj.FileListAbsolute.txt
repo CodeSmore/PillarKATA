@@ -1,0 +1,10 @@
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\PillarKata.csprojAssemblyReference.cache
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\PillarKata.csproj.CoreCompileInputs.cache
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\PillarKata.exe.config
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\PillarKata.exe
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\PillarKata.pdb
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\TestToolsToXunitProxy.dll
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\PillarKata.csproj.CopyComplete
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\PillarKata.exe
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\PillarKata.pdb

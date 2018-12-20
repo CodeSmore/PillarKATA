@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace PillarKata
 {
-    class Program
+    public class CheckoutOrderTotalAPI
     {
-        static void Main(string[] args)
+        public double CalculateTotalPrice(List<Item> cart)
         {
-            List<Item> cart = new List<Item>();
 
 
+            return 1.69d;
         }
+
     }
 }

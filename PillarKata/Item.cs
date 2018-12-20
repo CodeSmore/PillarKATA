@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace PillarKata
 {
-    class Program
+    public class Item
     {
-        static void Main(string[] args)
-        {
-            List<Item> cart = new List<Item>();
-
-
-        }
+        public int Id { get; set; }
+        public float BasePrice { get; set; }
     }
 }
