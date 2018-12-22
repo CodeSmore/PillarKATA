@@ -10,8 +10,6 @@ namespace PillarKata
     {
         static void Main(string[] args)
         {
-            List<Item> cart = new List<Item>();
-
 
         }
     }

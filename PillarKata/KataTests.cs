@@ -10,32 +10,28 @@ namespace PillarKata
     [TestClass()]
     public class KataTests
     {
-        List<Item> cart;
         CheckoutOrderTotalAPI api = new CheckoutOrderTotalAPI();
 
         [TestInitialize]
         public void Initialize()
         {
-            cart = new List<Item>();
+            api.cart.Clear();
         }
 
         [TestMethod()]
         public void CalculateTotalPriceOfOneItem()
         {
-            
-            List<Item> cart = new List<Item>();
-
-            cart.Add(new Item(1, 1.69m));
-            Assert.AreEqual(1.69m, api.CalculateTotalPrice(cart));
+            api.AddToCart("swiss cheese");
+            Assert.AreEqual(1.69m, api.CalculateTotalPrice(api.cart));
         }
 
         [TestMethod()]
         public void CalculateTotalPriceOfTwoItems()
         {
-            cart.Add(new Item(1, 1.69m));
-            cart.Add(new Item(2, 2.30m));
+            api.AddToCart("swiss cheese");
+            api.AddToCart("bread");
             
-            Assert.AreEqual(3.99m, api.CalculateTotalPrice(cart));
+            Assert.AreEqual(3.99m, api.CalculateTotalPrice(api.cart));
         }
     }
 }

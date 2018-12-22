@@ -8,6 +8,10 @@ namespace PillarKata
 {
     public class CheckoutOrderTotalAPI
     {
+        public List<Item> cart = new List<Item>();
+        public ItemCatalogue catalogue = new ItemCatalogue();
+
+        // GET
         public decimal CalculateTotalPrice(List<Item> cart)
         {
             decimal totalPrice = 0;
@@ -18,6 +22,22 @@ namespace PillarKata
             }
 
             return totalPrice;
+        }
+
+        // POST
+        public bool AddToCart(string itemName)
+        {
+            Item catalogueResponse = catalogue.GetItem(itemName);
+
+            if (catalogueResponse == null)
+            {
+                return false;
+            }
+            else {
+                cart.Add(catalogue.GetItem(itemName));
+
+                return true;
+            }
         }
 
     }

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CheckoutOrderTotalAPI.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="ItemCatalogue.cs" />
     <Compile Include="KataTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

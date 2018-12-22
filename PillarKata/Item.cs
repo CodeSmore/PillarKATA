@@ -8,16 +8,18 @@ namespace PillarKata
 {
     public class Item
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
         public decimal BasePrice { get; set; }
+        public double WeightInLbs { get; set; }
 
         public Item()
         { }
 
-        public Item(int id, decimal basePrice)
+        public Item(string name, decimal basePrice, double weight = 0)
         {
-            Id = id;
+            Name = name;
             BasePrice = basePrice;
+            WeightInLbs = weight;
         }
     }
 }
