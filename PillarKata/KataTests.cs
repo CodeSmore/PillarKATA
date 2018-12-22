@@ -19,19 +19,33 @@ namespace PillarKata
         }
 
         [TestMethod()]
-        public void CalculateTotalPriceOfOneItem()
+        public void Test0_SamepleTest()
         {
-            api.AddToCart("swiss cheese");
+            Assert.AreEqual(true, true);
+        }
+
+        [TestMethod()]
+        public void Test1_CalculateTotalPriceOfOneItem()
+        {
+            api.ScanItem("swiss cheese");
             Assert.AreEqual(1.69m, api.CalculateTotalPrice(api.cart));
         }
 
         [TestMethod()]
-        public void CalculateTotalPriceOfTwoItems()
+        public void Test2_CalculateTotalPriceOfTwoItems()
         {
-            api.AddToCart("swiss cheese");
-            api.AddToCart("bread");
+            api.ScanItem("swiss cheese");
+            api.ScanItem("bread");
             
             Assert.AreEqual(3.99m, api.CalculateTotalPrice(api.cart));
+        }
+
+        [TestMethod()]
+        public void Test3_CalculateTotalPriceIncludingWeightedItem()
+        {
+            api.ScanItem("salmon", 0.5);
+
+            Assert.AreEqual(0.75m, api.CalculateTotalPrice(api.cart));
         }
     }
 }

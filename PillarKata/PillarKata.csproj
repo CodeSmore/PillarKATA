@@ -48,8 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckoutOrderTotalAPI.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="ItemCatalogue.cs" />
+    <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\ItemCatalogue.cs" />
+    <Compile Include="Classes\ScannedItem.cs" />
     <Compile Include="KataTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
