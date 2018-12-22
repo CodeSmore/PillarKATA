@@ -14,6 +14,7 @@ namespace PillarKata
         public List<ScannedItem> cart = new List<ScannedItem>();
         public ItemCatalogue itemCatalogue = new ItemCatalogue();
         public MarkdownCatalogue markdownCatalogue = new MarkdownCatalogue();
+        public SpecialsCatalogue specialsCatalogue = new SpecialsCatalogue();
 
         // GET
         public decimal CalculateTotalPrice(List<ScannedItem> cart)
@@ -26,6 +27,7 @@ namespace PillarKata
 
                 itemTotal = item.Item.BasePrice;
 
+                // Check and apply Markdown
                 foreach (Markdown markdown in markdownCatalogue.Markdowns)
                 {
                     if (item.Item.Name == markdown.ItemName)
@@ -34,6 +36,16 @@ namespace PillarKata
                     }
                 }
 
+                // Check and count Special item purchases
+                foreach (Special special in specialsCatalogue.Specials)
+                {
+                    if (special.ItemName == item.Item.Name)
+                    {
+                        special.CurrentAmountInCart++;
+                    }
+                }
+
+                // Check and apply weight
                 if (item.WeightInLbs != 0)
                 {
                     itemTotal *= (decimal)item.WeightInLbs;
@@ -41,6 +53,16 @@ namespace PillarKata
 
 
                 totalPrice += itemTotal;
+            }
+
+            // Apply Specials
+            foreach (Special special in specialsCatalogue.Specials)
+            {
+                while (special.CurrentAmountInCart >= special.RequiredPurchaseAmount)
+                {
+                    special.CurrentAmountInCart -= special.RequiredPurchaseAmount;
+                    totalPrice -= special.Discount;
+                }
             }
 
             return totalPrice;

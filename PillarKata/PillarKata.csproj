@@ -50,9 +50,11 @@
     <Compile Include="CheckoutOrderTotalAPI.cs" />
     <Compile Include="Classes\Base\Item.cs" />
     <Compile Include="Classes\Base\Markdown.cs" />
+    <Compile Include="Classes\Base\Special.cs" />
     <Compile Include="Classes\Data\ItemCatalogue.cs" />
     <Compile Include="Classes\Base\ScannedItem.cs" />
     <Compile Include="Classes\Data\MarkdownCatalogue.cs" />
+    <Compile Include="Classes\Data\SpecialsCatalogue.cs" />
     <Compile Include="KataTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
