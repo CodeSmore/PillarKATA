@@ -1,4 +1,6 @@
 ﻿using PillarKata.Classes;
+using PillarKata.Classes.Base;
+using PillarKata.Classes.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,8 @@ namespace PillarKata
     public class CheckoutOrderTotalAPI
     {
         public List<ScannedItem> cart = new List<ScannedItem>();
-        public ItemCatalogue catalogue = new ItemCatalogue();
+        public ItemCatalogue itemCatalogue = new ItemCatalogue();
+        public MarkdownCatalogue markdownCatalogue = new MarkdownCatalogue();
 
         // GET
         public decimal CalculateTotalPrice(List<ScannedItem> cart)
@@ -19,14 +22,25 @@ namespace PillarKata
 
             foreach (ScannedItem item in cart)
             {
-                if (item.WeightInLbs == 0)
+                decimal itemTotal = 0;
+
+                itemTotal = item.Item.BasePrice;
+
+                foreach (Markdown markdown in markdownCatalogue.Markdowns)
                 {
-                    totalPrice += item.Item.BasePrice;
+                    if (item.Item.Name == markdown.ItemName)
+                    {
+                        itemTotal -= markdown.MarkdownAmount;
+                    }
                 }
-                else
+
+                if (item.WeightInLbs != 0)
                 {
-                    totalPrice += item.Item.BasePrice * (decimal)item.WeightInLbs;
+                    itemTotal *= (decimal)item.WeightInLbs;
                 }
+
+
+                totalPrice += itemTotal;
             }
 
             return totalPrice;
@@ -35,7 +49,7 @@ namespace PillarKata
         // POST
         public bool ScanItem(string itemName, double weightInLbs = 0)
         {
-            Item catalogueResponse = catalogue.GetItem(itemName);
+            Item catalogueResponse = itemCatalogue.GetItem(itemName);
 
             if (catalogueResponse == null)
             {

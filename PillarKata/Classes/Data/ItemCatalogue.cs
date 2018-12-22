@@ -18,6 +18,7 @@ namespace PillarKata
             Catalogue.Add(new Item("swiss cheese", 1.69m));
             Catalogue.Add(new Item("bread", 2.30m));
             Catalogue.Add(new Item("salmon", 1.50m));
+            Catalogue.Add(new Item("popcorn", 2.00m));
         }
 
         public Item GetItem(string name)
