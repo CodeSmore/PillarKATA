@@ -17,6 +17,9 @@ namespace PillarKata.Classes.Data
             // The third parameter for each special should be calculated based on ItemCatalogue price and 
             // MarkdownCatalogue rather than using static values since changes to either one would lead to
             // incorrect discounts
+
+            // Also TODO
+            // Refactor specials into 3 categories to make adding/adjusting specials easier
        
 
             // Special 1 Buy 2 Get 1 free

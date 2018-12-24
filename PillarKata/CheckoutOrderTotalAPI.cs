@@ -21,6 +21,12 @@ namespace PillarKata
         {
             decimal totalPrice = 0;
 
+            // reset specials count
+            foreach (Special special in specialsCatalogue.Specials)
+            {
+                special.CurrentAmountInCart = 0;
+            }
+
             foreach (ScannedItem item in cart)
             {
                 decimal itemTotal = 0;
@@ -72,7 +78,6 @@ namespace PillarKata
 
                     special.CurrentAmountInCart -= special.RequiredPurchaseAmount;
                     totalPrice -= special.Discount;
-
                 }
             }
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PillarKata.Classes;
 
 namespace PillarKata
 {
@@ -109,6 +111,10 @@ namespace PillarKata
             Assert.AreEqual(6.90m, api.CalculateTotalPrice(api.cart));
 
             api.RemoveItem(3);
+
+            Assert.AreEqual(4.60m, api.CalculateTotalPrice(api.cart));
+
+            api.RemoveItem(0);
 
             Assert.AreEqual(4.60m, api.CalculateTotalPrice(api.cart));
         }
