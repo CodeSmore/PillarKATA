@@ -20,7 +20,7 @@ namespace PillarKata.Classes.Data
        
 
             // Special 1 Buy 2 Get 1 free
-            Specials.Add(new Special("bread", 3, 2.30m));
+            Specials.Add(new Special("bread", 3, 2.30m, 2));
 
             // Special 1 Buy 5 Get 1 Half-off
             Specials.Add(new Special("popcorn", 6, 0.95m));

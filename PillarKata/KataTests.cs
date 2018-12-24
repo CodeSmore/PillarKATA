@@ -69,6 +69,7 @@ namespace PillarKata
         [TestMethod()]
         public void Test6_CalculateTotalPriceWithBuy3Get1HalfOffSpecial()
         {
+            // Six popcorn scans
             api.ScanItem("popcorn");
             api.ScanItem("popcorn");
             api.ScanItem("popcorn");
@@ -77,6 +78,23 @@ namespace PillarKata
             api.ScanItem("popcorn");
 
             Assert.AreEqual(10.45m, api.CalculateTotalPrice(api.cart));
+        }
+
+        [TestMethod()]
+        public void Test7_CalculateTotalPriceWithLimitedSpecial()
+        {
+            // Nine bread scans
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+
+            Assert.AreEqual(16.10m, api.CalculateTotalPrice(api.cart));
         }
     }
 }

@@ -58,10 +58,21 @@ namespace PillarKata
             // Apply Specials
             foreach (Special special in specialsCatalogue.Specials)
             {
+                var numSpecialUses = special.MaxUsesOfDiscount;
                 while (special.CurrentAmountInCart >= special.RequiredPurchaseAmount)
                 {
+                    if (numSpecialUses > 0)
+                    {
+                        numSpecialUses--;
+                    }
+                    else if (numSpecialUses == 0)
+                    {
+                        break;
+                    }
+
                     special.CurrentAmountInCart -= special.RequiredPurchaseAmount;
                     totalPrice -= special.Discount;
+
                 }
             }
 
