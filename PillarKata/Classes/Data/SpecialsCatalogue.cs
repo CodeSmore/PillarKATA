@@ -13,8 +13,17 @@ namespace PillarKata.Classes.Data
 
         public SpecialsCatalogue()
         {
-            // Special 1
+            // TODO
+            // The third parameter for each special should be calculated based on ItemCatalogue price and 
+            // MarkdownCatalogue rather than using static values since changes to either one would lead to
+            // incorrect discounts
+       
+
+            // Special 1 Buy 2 Get 1 free
             Specials.Add(new Special("bread", 3, 2.30m));
+
+            // Special 1 Buy 5 Get 1 Half-off
+            Specials.Add(new Special("popcorn", 6, 0.95m));
         }
     }
 }
