@@ -96,5 +96,21 @@ namespace PillarKata
 
             Assert.AreEqual(16.10m, api.CalculateTotalPrice(api.cart));
         }
+
+        [TestMethod()]
+        public void Test8_CalculateTotalPriceAfterRemovingItemFromCart()
+        {
+            // Nine bread scans
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+            api.ScanItem("bread");
+
+            Assert.AreEqual(6.90m, api.CalculateTotalPrice(api.cart));
+
+            api.RemoveItem(3);
+
+            Assert.AreEqual(4.60m, api.CalculateTotalPrice(api.cart));
+        }
     }
 }

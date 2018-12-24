@@ -95,5 +95,21 @@ namespace PillarKata
                 return true;
             }
         }
+
+        // DEL
+        // Removes item from cart at supplied index
+        public bool RemoveItem(int index)
+        {
+            if (cart.Count < index + 1 || index < 0)
+            {
+                return false;
+            }
+            else
+            {
+                cart.RemoveAt(index);
+
+                return true;
+            }
+        }
     }
 }
