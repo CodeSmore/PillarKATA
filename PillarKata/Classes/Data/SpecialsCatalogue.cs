@@ -29,7 +29,7 @@ namespace PillarKata.Classes.Data
             Specials.Add(new Special("popcorn", 6, 0.95m));
 
             // Special 3 -- Buy 1 Get 1 for 10% off on weighted item
-            Specials.Add(new Special("salmon", 1, /*percent*/ 0.10f));
+            Specials.Add(new Special("salmon", 3, /*percent*/ 0.10f));
         }
     }
 }

@@ -122,12 +122,29 @@ namespace PillarKata
         }
 
         [TestMethod()]
-        public void Test9_CalculateTotalPriceWith_BuyNGetMOfEqualOrLesserValueForXPercentOff_Special()
+        public void Test9_CalculateTotalPriceWith_Buy2Get1OfEqualOrLesserValueFor10PercentOff_Special()
         {
-            api.ScanItem("honey ham", 0.5/*lbs*/);
-            api.ScanItem("salmon", 2/*lbs*/);
+            api.ScanItem("salmon", 2);
+            api.ScanItem("salmon", 3);
+            api.ScanItem("salmon", 2);
 
-            Assert.AreEqual(5.70m, api.CalculateTotalPrice(api.cart));
+            Assert.AreEqual(10.20m, api.CalculateTotalPrice(api.cart));
+
+            api.cart.Clear();
+
+            api.ScanItem("salmon", 3);
+            api.ScanItem("salmon", 2);
+            api.ScanItem("salmon", 2);
+
+            Assert.AreEqual(10.20m, api.CalculateTotalPrice(api.cart));
+
+            api.cart.Clear();
+
+            api.ScanItem("salmon", 2);
+            api.ScanItem("salmon", 2);
+            api.ScanItem("salmon", 3);
+
+            Assert.AreEqual(10.20m, api.CalculateTotalPrice(api.cart));
         }
     }
 }
