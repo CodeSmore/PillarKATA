@@ -102,7 +102,7 @@ namespace PillarKata
         [TestMethod()]
         public void Test8_CalculateTotalPriceAfterRemovingItemFromCart()
         {
-            // Nine bread scans
+            // Four bread scans
             api.ScanItem("bread");
             api.ScanItem("bread");
             api.ScanItem("bread");
@@ -110,6 +110,8 @@ namespace PillarKata
 
             Assert.AreEqual(6.90m, api.CalculateTotalPrice(api.cart));
 
+            // The following tests verify that the special on purchasing bread is applied/removed correctly after each
+            // removal from the cart
             api.RemoveItem(3);
 
             Assert.AreEqual(4.60m, api.CalculateTotalPrice(api.cart));
@@ -117,6 +119,15 @@ namespace PillarKata
             api.RemoveItem(0);
 
             Assert.AreEqual(4.60m, api.CalculateTotalPrice(api.cart));
+        }
+
+        [TestMethod()]
+        public void Test9_CalculateTotalPriceWith_BuyNGetMOfEqualOrLesserValueForXPercentOff_Special()
+        {
+            api.ScanItem("honey ham", 0.5/*lbs*/);
+            api.ScanItem("salmon", 2/*lbs*/);
+
+            Assert.AreEqual(5.70m, api.CalculateTotalPrice(api.cart));
         }
     }
 }

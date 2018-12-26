@@ -22,11 +22,14 @@ namespace PillarKata.Classes.Data
             // Refactor specials into 3 categories to make adding/adjusting specials easier
        
 
-            // Special 1 Buy 2 Get 1 free
+            // Special 1 -- Buy 2 Get 1 free
             Specials.Add(new Special("bread", 3, 2.30m, 2));
 
-            // Special 1 Buy 5 Get 1 Half-off
+            // Special 2 -- Buy 5 Get 1 Half-off
             Specials.Add(new Special("popcorn", 6, 0.95m));
+
+            // Special 3 -- Buy 1 Get 1 for 10% off on weighted item
+            Specials.Add(new Special("salmon", 1, /*percent*/ 0.10f));
         }
     }
 }

@@ -77,7 +77,25 @@ namespace PillarKata
                     }
 
                     special.CurrentAmountInCart -= special.RequiredPurchaseAmount;
-                    totalPrice -= special.Discount;
+
+                    if (special.IsWeightedSpecial)
+                    {
+                        if (cart.Count > 1)
+                        {
+                            foreach (ScannedItem item in cart)
+                            {
+                                if (item.WeightInLbs != 0)
+                                {
+                                    totalPrice -= special.Discount * (item.Item.BasePrice * (decimal)item.WeightInLbs);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        totalPrice -= special.Discount;
+                    }
                 }
             }
 

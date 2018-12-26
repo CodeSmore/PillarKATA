@@ -13,6 +13,7 @@ namespace PillarKata.Classes.Base
         public int CurrentAmountInCart { get; set; }
         public int MaxUsesOfDiscount { get; set; }
         public decimal Discount { get; set; }
+        public bool IsWeightedSpecial { get; set; }
 
         public Special(string name, int requiredAmount, decimal discount, int maxUses = -1)
         {
@@ -20,6 +21,16 @@ namespace PillarKata.Classes.Base
             RequiredPurchaseAmount = requiredAmount;
             Discount = discount;
             MaxUsesOfDiscount = maxUses;
+            IsWeightedSpecial = false;
+        }
+
+        public Special(string name, int requiredAmount, float percentDiscount, int maxUses = -1)
+        {
+            ItemName = name;
+            RequiredPurchaseAmount = requiredAmount;
+            Discount = (decimal)percentDiscount;
+            MaxUsesOfDiscount = maxUses;
+            IsWeightedSpecial = true;
         }
     }
 }
