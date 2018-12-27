@@ -34,7 +34,7 @@ namespace PillarKata
                 itemTotal = item.Item.BasePrice;
 
                 // Check and apply Markdown
-                itemTotal = GetItemMarkdown(itemTotal, item);
+                itemTotal = GetItemPriceWithMarkdown(item);
 
                 // Check and count Special item purchases
                 CheckForSpecialRelatedItems(item);
@@ -88,15 +88,15 @@ namespace PillarKata
 
         // -------------------------------------------------------------
         // Helper Methods for CalculateTotalPrice()
-        decimal GetItemMarkdown(decimal priorItemTotal, ScannedItem item)
+        decimal GetItemPriceWithMarkdown(ScannedItem item)
         {
-            decimal resultingItemTotal = priorItemTotal;
+            decimal resultingItemTotal = item.Item.BasePrice;
 
             foreach (Markdown markdown in markdownCatalogue.Markdowns)
             {
                 if (item.Item.Name == markdown.ItemName)
                 {
-                    resultingItemTotal = priorItemTotal - markdown.MarkdownAmount;
+                    resultingItemTotal = item.Item.BasePrice - markdown.MarkdownAmount;
                 }
             }
 
@@ -121,7 +121,7 @@ namespace PillarKata
             foreach (Special special in specialsCatalogue.Specials)
             {
                 var numSpecialUses = special.MaxUsesOfDiscount;
-                while (special.CurrentAmountInCart >= special.RequiredPurchaseAmount)
+                while (special.CurrentAmountInCart >= special.RequiredPurchaseQuantity)
                 {
                     if (numSpecialUses > 0)
                     {
@@ -132,10 +132,22 @@ namespace PillarKata
                         break;
                     }
 
-                    special.CurrentAmountInCart -= special.RequiredPurchaseAmount;
+                    special.CurrentAmountInCart -= special.RequiredPurchaseQuantity;
 
+                    if (special.SpecialType == SpecialType.staticPriceSpecial)
+                    {
+                        ScannedItem itemsInCart = null;
 
-                    if (special.IsWeightedSpecial)
+                        foreach (ScannedItem item in cart)
+                        {
+                            if (item.Item.Name == special.ItemName)
+                            {
+                                itemsInCart = item;
+                            }
+                        }
+                        totalPrice -= (GetItemPriceWithMarkdown(itemsInCart) * special.RequiredPurchaseQuantity - special.StaticSpecialPrice); 
+                    }
+                    else if (special.IsWeightedSpecial)
                     {
                         if (cart.Count > 1)
                         {
@@ -146,8 +158,6 @@ namespace PillarKata
                                 if (item.WeightInLbs != 0 && item.Item.Name == special.ItemName)
                                 {
                                     itemsThatApplyWeightedDiscount.Add(item);
-                                    //totalPrice -= special.Discount * (item.Item.BasePrice * (decimal)item.WeightInLbs);
-                                    //break;
                                 }
                             }
 
@@ -160,13 +170,20 @@ namespace PillarKata
                                 }
                             }
 
-                            totalPrice -= special.Discount * (itemWithLowestPrice.Item.BasePrice * (decimal)itemWithLowestPrice.WeightInLbs);
+                            totalPrice -= special.DiscountPercentage * (itemWithLowestPrice.Item.BasePrice * (decimal)itemWithLowestPrice.WeightInLbs * special.DiscountedQuantity);
                             break;
                         }
                     }
                     else
                     {
-                        totalPrice -= special.Discount;
+                        foreach (ScannedItem item in cart)
+                        {
+                            if (item.Item.Name == special.ItemName)
+                            {
+                                totalPrice -= special.DiscountPercentage * special.DiscountedQuantity * GetItemPriceWithMarkdown(item);
+                                break;
+                            }
+                        }
                     }
                 }
             }
