@@ -14,27 +14,26 @@ namespace PillarKata.Classes.Base
         public int CurrentAmountInCart { get; set; }
         public int MaxUsesOfDiscount { get; set; }
         public decimal DiscountPercentage { get; set; }
-        public bool IsWeightedSpecial { get; set; }
 
         public SpecialType SpecialType { get; set; }
         public decimal StaticSpecialPrice { get; set; } 
 
-        public Special(string name, int requiredQuantity, int discountedQuantity, decimal discountPercentage, bool isWeightedSpecial = false, int maxUses = -1)
+        public Special(string name, SpecialType specialType, int requiredQuantity, int discountedQuantity, decimal discountPercentage, int maxUses = -1)
         {
             ItemName = name;
+            SpecialType = specialType;
             RequiredPurchaseQuantity = requiredQuantity;
             DiscountedQuantity = discountedQuantity;
             DiscountPercentage = discountPercentage;
             MaxUsesOfDiscount = maxUses;
-            IsWeightedSpecial = isWeightedSpecial;
         }
 
-        public Special(string name, int requiredQuantity, SpecialType specialType, decimal staticSpecialPrice, int maxUses = -1)
+        public Special(string name, SpecialType specialType, int requiredQuantity, decimal staticSpecialPrice, int maxUses = -1)
         {
             ItemName = name;
+            SpecialType = specialType;
             RequiredPurchaseQuantity = requiredQuantity;
             MaxUsesOfDiscount = maxUses;
-            SpecialType = specialType;
             StaticSpecialPrice = staticSpecialPrice;
         }
     }

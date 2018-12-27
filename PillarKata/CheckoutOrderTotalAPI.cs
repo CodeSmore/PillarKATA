@@ -21,7 +21,7 @@ namespace PillarKata
         {
             decimal totalPrice = 0;
 
-            // reset specials count
+            // reset count of items that are part of a special
             foreach (Special special in specialsCatalogue.Specials)
             {
                 special.CurrentAmountInCart = 0;
@@ -29,12 +29,12 @@ namespace PillarKata
 
             foreach (ScannedItem item in cart)
             {
-                decimal itemTotal = 0;
+                decimal itemTotalPrice = 0;
 
-                itemTotal = item.Item.BasePrice;
+                itemTotalPrice = item.Item.BasePrice;
 
                 // Check and apply Markdown
-                itemTotal = GetItemPriceWithMarkdown(item);
+                itemTotalPrice = GetItemPriceWithMarkdown(item);
 
                 // Check and count Special item purchases
                 CheckForSpecialRelatedItems(item);
@@ -43,10 +43,10 @@ namespace PillarKata
                 // Check and apply weight
                 if (item.WeightInLbs != 0)
                 {
-                    itemTotal *= (decimal)item.WeightInLbs;
+                    itemTotalPrice *= (decimal)item.WeightInLbs;
                 }
 
-                totalPrice += itemTotal;
+                totalPrice += itemTotalPrice;
             }
 
             // Apply Specials
@@ -90,17 +90,17 @@ namespace PillarKata
         // Helper Methods for CalculateTotalPrice()
         decimal GetItemPriceWithMarkdown(ScannedItem item)
         {
-            decimal resultingItemTotal = item.Item.BasePrice;
+            decimal newTotalItemPrice = item.Item.BasePrice;
 
             foreach (Markdown markdown in markdownCatalogue.Markdowns)
             {
                 if (item.Item.Name == markdown.ItemName)
                 {
-                    resultingItemTotal = item.Item.BasePrice - markdown.MarkdownAmount;
+                    newTotalItemPrice = item.Item.BasePrice - markdown.MarkdownAmount;
                 }
             }
 
-            return resultingItemTotal;
+            return newTotalItemPrice;
         }
 
         void CheckForSpecialRelatedItems(ScannedItem item)
@@ -134,61 +134,89 @@ namespace PillarKata
 
                     special.CurrentAmountInCart -= special.RequiredPurchaseQuantity;
 
+
                     if (special.SpecialType == SpecialType.staticPriceSpecial)
                     {
-                        ScannedItem itemsInCart = null;
-
-                        foreach (ScannedItem item in cart)
-                        {
-                            if (item.Item.Name == special.ItemName)
-                            {
-                                itemsInCart = item;
-                            }
-                        }
-                        totalPrice -= (GetItemPriceWithMarkdown(itemsInCart) * special.RequiredPurchaseQuantity - special.StaticSpecialPrice); 
+                        totalPrice -= GetStaticPriceSpecialAdjustment(special);
                     }
-                    else if (special.IsWeightedSpecial)
+                    else if (special.SpecialType == SpecialType.weightedPercentSpecial)
                     {
-                        if (cart.Count > 1)
-                        {
-                            List<ScannedItem> itemsThatApplyWeightedDiscount = new List<ScannedItem>();
-
-                            foreach (ScannedItem item in cart)
-                            {
-                                if (item.WeightInLbs != 0 && item.Item.Name == special.ItemName)
-                                {
-                                    itemsThatApplyWeightedDiscount.Add(item);
-                                }
-                            }
-
-                            ScannedItem itemWithLowestPrice = null;
-                            foreach (ScannedItem item in itemsThatApplyWeightedDiscount)
-                            {
-                                if (itemWithLowestPrice == null || itemWithLowestPrice.WeightInLbs > item.WeightInLbs)
-                                {
-                                    itemWithLowestPrice = item;
-                                }
-                            }
-
-                            totalPrice -= special.DiscountPercentage * (itemWithLowestPrice.Item.BasePrice * (decimal)itemWithLowestPrice.WeightInLbs * special.DiscountedQuantity);
-                            break;
-                        }
+                        totalPrice -= GetWeightedPercentSpecialAdjustment(special);          
                     }
-                    else
+                    else if (special.SpecialType == SpecialType.percentSpecial)
                     {
-                        foreach (ScannedItem item in cart)
-                        {
-                            if (item.Item.Name == special.ItemName)
-                            {
-                                totalPrice -= special.DiscountPercentage * special.DiscountedQuantity * GetItemPriceWithMarkdown(item);
-                                break;
-                            }
-                        }
+
+                        totalPrice -= GetPercentSpecialAdjustment(special);
                     }
                 }
             }
 
             return totalPrice;
+        }
+
+        decimal GetStaticPriceSpecialAdjustment(Special special)
+        {
+            decimal specialPriceAdjustment = 0;
+            ScannedItem itemsInCart = null;
+
+            foreach (ScannedItem item in cart)
+            {
+                if (item.Item.Name == special.ItemName)
+                {
+                    itemsInCart = item;
+                }
+            }
+            specialPriceAdjustment = (GetItemPriceWithMarkdown(itemsInCart) * special.RequiredPurchaseQuantity - special.StaticSpecialPrice);
+
+            return specialPriceAdjustment;
+        }
+
+        decimal GetWeightedPercentSpecialAdjustment(Special special)
+        {
+            decimal specialPriceAdjustment = 0;
+
+            if (cart.Count > 1)
+            {
+                List<ScannedItem> itemsThatApplyWeightedDiscount = new List<ScannedItem>();
+
+                foreach (ScannedItem item in cart)
+                {
+                    if (item.WeightInLbs != 0 && item.Item.Name == special.ItemName)
+                    {
+                        itemsThatApplyWeightedDiscount.Add(item);
+                    }
+                }
+
+                ScannedItem itemWithLowestPrice = null;
+                foreach (ScannedItem item in itemsThatApplyWeightedDiscount)
+                {
+                    if (itemWithLowestPrice == null || itemWithLowestPrice.WeightInLbs > item.WeightInLbs)
+                    {
+                        itemWithLowestPrice = item;
+                    }
+                }
+
+                specialPriceAdjustment = special.DiscountPercentage * (itemWithLowestPrice.Item.BasePrice * (decimal)itemWithLowestPrice.WeightInLbs * special.DiscountedQuantity);
+                //break;
+            }
+
+            return specialPriceAdjustment;
+        }
+
+        decimal GetPercentSpecialAdjustment(Special special)
+        {
+            decimal specialPriceAdjustment = 0;
+
+            foreach (ScannedItem item in cart)
+            {
+                if (item.Item.Name == special.ItemName)
+                {
+                    specialPriceAdjustment = special.DiscountPercentage * special.DiscountedQuantity * GetItemPriceWithMarkdown(item);
+                    break;
+                }
+            }
+
+            return specialPriceAdjustment;
         }
     }
 }
