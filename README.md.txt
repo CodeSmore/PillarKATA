@@ -11,27 +11,32 @@ in the /Classes/Data folder
 ### Setup
 
 Microsoft Visual Studio is required to open the solution.
-The free Community Edition for Windows and maxOS can be downloading at 
+The free Community Edition for Windows and maxOS can be downloading at...
 https://visualstudio.microsoft.com/downloads/
+
+The .NET Core SDK is also required, which can be downloaded from...
+https://dotnet.microsoft.com/download
 
 Once installed, the solution can be opened by double-clicking the PillarKata.sln file.
 
-In Order to run the Unit Tests, the QualityTools.UnitTestFramework reference must
-be included in the project. If it's missing follow the steps below to add it
-to the project...
+In Order to run the Unit Tests, the .NET Core SDK and several NuGet packages must
+be present under 'Dependencies' in the Solution Explorer
+- Microsoft.NET.Test.SDK
+- MSTest.TestAdapter
+- MSTest.TestFramework
 
-1. Open the PillarKata.sln file in Microsoft Visual Studio
-2. In the Solution Explorer, type 'references' into the search
-box at the top.
-3. Right-click 'References' in the search results
-4. Click 'Add Reference'
-5. In the top-right search bar, type 'QualityTools.UnitTestFramework'
-6. Check the check-box next to the name of latest version
-7. Click the OK button at the bottom of the Reference Manager
+If any are missing, they can be added to the project via the NuGet Package Manager.
+This can be accessed via Tools > NuGet Package Manager > Manage NuGet Packages for Solution.
+From there, click 'Browse' at the top and search for each package by name and select the project
+and click install.
 
 ## Running the tests
 
-To run all of the tests, hold the control key and press R then A
+To run the tests from the command prompt, access the Package Manager Console via
+Tools > NuGet Package Manager > Package Manager Console then input 'dotnet test' to run
+all tests.
+
+To run all of the tests using hotkeys, hold the control key and press R then A
 or...
 At the top menu of Visual Studio, select Test, then Run, then All Tests
 or...

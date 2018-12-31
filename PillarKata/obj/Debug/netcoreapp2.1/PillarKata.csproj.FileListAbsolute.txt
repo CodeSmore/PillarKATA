@@ -1,0 +1,15 @@
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\netcoreapp2.1\PillarKata.csproj.CoreCompileInputs.cache
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\netcoreapp2.1\PillarKata.AssemblyInfoInputs.cache
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\netcoreapp2.1\PillarKata.AssemblyInfo.cs
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\netcoreapp2.1\PillarKata.csprojAssemblyReference.cache
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\PillarKata.dll.config
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\PillarKata.deps.json
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\PillarKata.runtimeconfig.json
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\PillarKata.runtimeconfig.dev.json
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\PillarKata.dll
+C:\Users\codes\source\repos\PillarKata\PillarKata\bin\Debug\netcoreapp2.1\PillarKata.pdb
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\netcoreapp2.1\PillarKata.dll
+C:\Users\codes\source\repos\PillarKata\PillarKata\obj\Debug\netcoreapp2.1\PillarKata.pdb
