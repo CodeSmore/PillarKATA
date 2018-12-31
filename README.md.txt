@@ -32,10 +32,12 @@ and click install.
 
 ## Running the tests
 
-To run the tests from the command prompt, access the Package Manager Console via
-Tools > NuGet Package Manager > Package Manager Console then input 'dotnet test' to run
-all tests.
+To run the tests from the command prompt without needing to open Visual Studio... 
+run the command prompt, move the directory to the root 'PillarKata' folder 
+(the one with the PillarKata.sln file),
+and input `dotnet test` to run all tests. 
 
+Within Visual Studio...
 To run all of the tests using hotkeys, hold the control key and press R then A
 or...
 At the top menu of Visual Studio, select Test, then Run, then All Tests
